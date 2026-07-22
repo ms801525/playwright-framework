@@ -245,149 +245,52 @@ def test_cm_inches_convert(toolkit):
 
 
 
+#THIS IS FOR THE TEXT ANALYZER
 
+def test_char_count_analyze(toolkit):
+    toolkit.locator("#text-analyzer-select").select_option("char-count")
+    toolkit.get_by_placeholder("Enter text to be analyzed").click()
+    toolkit.locator("#text-analyzer-input").fill("Hello, My name is John. I live in New York.")
+    toolkit.get_by_role("button", name = "Analyze").click()
 
+    expect(toolkit.get_by_text("Result: 43"))
+    time.sleep(2)
 
-
-
-
-"""
-def run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
-    context = browser.new_context()
-    toolkit = context.new_toolkit()
-    toolkit.goto("https://www.jsutilitytoolkit.com/")
-    toolkit.locator("#input1").click()
-    toolkit.locator("#input1").fill("5")
-    toolkit.locator("#input2").click()
-    toolkit.locator("#input2").fill("5")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#operations").select_option("subtract")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.get_by_role("button", name="Copy").click()
-    toolkit.locator("#operations").select_option("multiply")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#operations").select_option("divide")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#input1").click()
-    toolkit.locator("#input1").fill("-5")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#operations").select_option("add")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#operations").select_option("subtract")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#operations").select_option("multiply")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#input1").click()
-    toolkit.locator("#input1").fill("5")
-    toolkit.locator("#operations").select_option("pow")
-    toolkit.get_by_role("button", name="Calculate").click()
-    toolkit.locator("#clear-button-json").click()
-
-
-    toolkit.locator("#input1").click()
-    toolkit.locator("#input1").fill("55")
-    toolkit.locator("#input2").click()
-    toolkit.locator("#input2").fill("5")
-    toolkit.locator("#clear-button-json").click()
-    toolkit.locator("#input1").click()
-    toolkit.locator("#input1").fill("55")
-    toolkit.locator("#input2").click()
-    toolkit.locator("#input2").fill("5")
-    toolkit.locator("#operations").select_option("sqrt")
-    toolkit.get_by_role("button", name="Calculate").click()
-
-
-    toolkit.get_by_placeholder("Enter value to be converted").click()
-    toolkit.get_by_placeholder("Enter value to be converted").fill("45")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("km-to-miles")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("celsius-to-fahrenheit")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("lbs-to-kg")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("miles-to-km")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("fahrenheit-to-celsius")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("feet-to-meters")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("meters-to-feet")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("liters-to-gallons")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("gallons-to-liters")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("inches-to-centimeters")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#unit-converter-select").select_option("centimeters-to-inches")
-    toolkit.get_by_role("button", name="Convert").click()
-    toolkit.locator("#clear-button-unit").click()
-
-
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").fill("hello")
-    toolkit.get_by_role("button", name="Analyze").click()
-
-
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").fill("hello my name is mustafa")
-    toolkit.get_by_role("button", name="Analyze").click()
-
-
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").press("CapsLock")
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").fill("HEllO MY NAME IS MUSTAFA")
-    toolkit.get_by_role("button", name="Analyze").click()
-
-
+def test_word_count_analyze(toolkit):
     toolkit.locator("#text-analyzer-select").select_option("word-count")
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").fill("hello my name is mustafa")
-    toolkit.get_by_role("button", name="Analyze").click()
+    toolkit.get_by_placeholder("Enter text to be analyzed").click()
+    toolkit.locator("#text-analyzer-input").fill("Hello, My name is John. I live in New York.")
+    toolkit.get_by_role("button", name = "Analyze").click()
 
+    expect(toolkit.get_by_text("Result: 10"))
+    time.sleeP(2)
+
+def test_sen_count_analyze(toolkit):
     toolkit.locator("#text-analyzer-select").select_option("sentence-count")
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").fill("hello my name is mustafa")
-    toolkit.get_by_role("button", name="Analyze").click()
+    toolkit.get_by_placeholder("Enter text to be analyzed").click()
+    toolkit.locator("#text-analyzer-input").fill("Hello, My name is John. I live in New York.")
+    toolkit.get_by_role("button", name = "Analyze").click()
 
+    expect(toolkit.get_by_text("Result: 2"))
+    time.sleep(2)
 
-
+def test_common_word_analyze(toolkit):
     toolkit.locator("#text-analyzer-select").select_option("most-common-word")
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").fill("hello my name is mustafa")
-    toolkit.get_by_role("button", name="Analyze").click()
+    toolkit.get_by_placeholder("Enter text to be analyzed").click()
+    toolkit.locator("#text-analyzer-input").fill("Hello I am john. Hello I am Jason. Hello I am Jack. Hey I am Kat. Hey you are Kurt. Hello you are Sam. Hello this is Kurtis")
+    toolkit.get_by_role("button", name = "Analyze").click()
+
+    expect(toolkit.get_by_text("Result: hello"))
+    time.sleep(2)
+    
+    
+#THIS IS FOR THE JSON FORMATTER
 
 
-    toolkit.locator("#clear-button-analyzer").click()
-
-    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").click()
-    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").fill("Make")
-    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").click()
-    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
-    toolkit.locator("#json-formatter-input-2a").click()
-    toolkit.locator("#json-formatter-input-2a").fill("Model")
-    toolkit.locator("#json-formatter-input-2b").click()
-    toolkit.locator("#json-formatter-input-2b").fill("Civic")
-    toolkit.locator("#json-formatter-input-3a").click()
-    toolkit.locator("#json-formatter-input-3a").fill("Year")
-    toolkit.locator("#json-formatter-input-3b").click()
-    toolkit.locator("#json-formatter-input-3b").fill("2016")
-    toolkit.get_by_role("button", name="Format").click()
-    toolkit.get_by_role("button", name="Copy").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").click()
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").press("ControlOrMeta+v")
-    toolkit.get_by_role("textbox", name="Enter text to be analyzed").fill("{\n  \"Make\": \"Honda\",\n  \"Model\": \"Civic\",\n  \"Year\": \"2016\"\n}")
-    toolkit.get_by_role("button", name="Analyze").click()
-    toolkit.locator("#clear-button-json").click()
-    toolkit.get_by_role("button", name="Format").click()
-
-    # ---------------------
-    context.close()
-    browser.close()
 
 
-with sync_playwright() as playwright:
-    run(playwright)
-"""
+
+
+
+
+
