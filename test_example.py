@@ -263,7 +263,7 @@ def test_word_count_analyze(toolkit):
     toolkit.get_by_role("button", name = "Analyze").click()
 
     expect(toolkit.get_by_text("Result: 10"))
-    time.sleeP(2)
+    time.sleep(2)
 
 def test_sen_count_analyze(toolkit):
     toolkit.locator("#text-analyzer-select").select_option("sentence-count")
@@ -285,6 +285,103 @@ def test_common_word_analyze(toolkit):
     
     
 #THIS IS FOR THE JSON FORMATTER
+def test_first_key_pair(toolkit):
+
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").fill("Make")
+    toolkit.get_by_role("button", name="Format").click()
+
+    expect(toolkit.get_by_text("Invalid, first JSON key:value"))
+    time.sleep(2)
+
+def test_first_value(toolkit):
+    toolkit.locator("#clear-button-json").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
+    toolkit.get_by_role("button", name="Format").click()
+
+    expect(toolkit.get_by_text("Invalid, first JSON key:value"))
+    time.sleep(2)
+
+def test_first_key_value_pair(toolkit):
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").fill("Make")
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
+    toolkit.get_by_role("button", name="Format").click()
+
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\" }"))
+    time.sleep(2)
+    
+def test_2_key_value_pair(toolkit):
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").fill("Make")
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
+
+    toolkit.locator("#json-formatter-input-2a").click()
+    toolkit.locator("#json-formatter-input-2a").fill("Model")
+
+    toolkit.locator("#json-formatter-input-2b").click()
+    toolkit.locator("#json-formatter-input-2b").fill("Civic")
+
+    toolkit.get_by_role("button", name="Format").click()
+
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \""))
+    time.sleep(2)
+
+def test_3_key_value_pair(toolkit):
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").fill("Make")
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
+
+    toolkit.locator("#json-formatter-input-2a").click()
+    toolkit.locator("#json-formatter-input-2a").fill("Model")
+
+    toolkit.locator("#json-formatter-input-2b").click()
+    toolkit.locator("#json-formatter-input-2b").fill("Civic")
+
+    toolkit.locator("#json-formatter-input-3a").fill("Year")
+    toolkit.locator("#json-formatter-input-3b").click()
+    toolkit.locator("#json-formatter-input-3b").fill("2016")
+    toolkit.get_by_role("button", name="Format").click()
+
+    toolkit.get_by_role("button", name="Format").click()
+
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \""))
+    time.sleep(2)
+
+def test_key_value_copy(toolkit):
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").fill("Make")
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").click()
+    toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
+
+    toolkit.locator("#json-formatter-input-2a").click()
+    toolkit.locator("#json-formatter-input-2a").fill("Model")
+
+    toolkit.locator("#json-formatter-input-2b").click()
+    toolkit.locator("#json-formatter-input-2b").fill("Civic")
+
+    toolkit.locator("#json-formatter-input-3a").fill("Year")
+    toolkit.locator("#json-formatter-input-3b").click()
+    toolkit.locator("#json-formatter-input-3b").fill("2016")
+    toolkit.get_by_role("button", name="Format").click()
+
+    toolkit.get_by_role("button", name="Format").click()
+    toolkit.get_by_role("button", name="Copy").click()
+
+    toolkit.locator("#text-analyzer-input").fill("{\n  \"Make\": \"Honda\",\n  \"Model\": \"Civic\",\n  \"Year\": \"2016\"\n}")
+
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \""))
+    time.sleep(2)
+
+
+
+
+
+
 
 
 
