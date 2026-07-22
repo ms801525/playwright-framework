@@ -11,7 +11,7 @@ def toolkit(browser: Browser):
     
     context.close()
 
-
+#THIS IS TO TEST THE BUTTON CLICK IN EMPTY TEXT BOXES 
 def test_has_title(toolkit: Page):
     # Expect a title "to contain" a substring.
     expect(toolkit).to_have_title(re.compile("JavaScript Utility Toolkit V1"))
@@ -44,7 +44,7 @@ def test_empty_sqrt(toolkit):
     expect(toolkit.get_by_text("Result: Not Valid, Please")).to_be_visible()
     time.sleep(2)
 
-
+#THIS IS FOR THE CALCULATOR FEATURE
 def test_add_calculate(toolkit):
 
     # try the first calculation
@@ -122,6 +122,126 @@ def test_sqrt_calculate(toolkit):
     time.sleep(2)
 
 
+#THIS IS FOR THE UNIT CONVERTER
+def test_kg_lbs_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("kg-to-lbs")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 220.46")).to_be_visible()
+    time.sleep(2)
+
+def test_km_miles_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("km-to-miles")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 62.14")).to_be_visible()
+    time.sleep(2)
+
+def test_cel_fah_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("celsius-to-fahrenheit")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 212.00")).to_be_visible()
+    time.sleep(2)
+
+def test_lbs_kg_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("lbs-to-kg")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 45.36")).to_be_visible()
+    time.sleep(2)
+
+def test_miles_km_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("miles-to-km")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 160.93")).to_be_visible()
+    time.sleep(2)
+
+def test_fah_cel_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("fahrenheit-to-celsius")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 37.78")).to_be_visible()
+    time.sleep(2)
+
+def test_meters_feet_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("meters-to-feet")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 328.08")).to_be_visible()
+    time.sleep(2)
+
+def test_feer_meters_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("feet-to-meters")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 30.48")).to_be_visible()
+    time.sleep(2)
+
+def test_liters_gallons_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("liters-to-gallons")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 26.42")).to_be_visible()
+    time.sleep(2)
+
+def test_gallons_liters_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("gallons-to-liters")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 378.54")).to_be_visible()
+    time.sleep(2)
+
+def test_inches_cm_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("inches-to-centimeters")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 254.00")).to_be_visible()
+    time.sleep(2)
+
+def test_cm_inches_convert(toolkit):
+    toolkit.locator("#unit-converter-select").select_option("centimeters-to-inches")
+    toolkit.get_by_placeholder("Enter value to be converted").click()
+    toolkit.locator("#unit-converter-input").fill("100")
+    toolkit.locator("#unit-converter-button").click()
+    toolkit.get_by_role("button", name="Convert").click()
+
+    expect(toolkit.get_by_text("Result: 39.37")).to_be_visible()
+    time.sleep(2)
 
 
 
