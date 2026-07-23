@@ -2,7 +2,7 @@ import re, pytest, time
 from playwright.sync_api import Page, expect, Browser
 
 @pytest.fixture (scope="module")
-def toolkit(browser: Browser):
+def quote(browser: Browser):
     context = browser.new_context()
     page = context.new_page()
     page.goto("https://www.quoteofthetimes.com/")
@@ -10,3 +10,71 @@ def toolkit(browser: Browser):
     yield page 
     
     context.close()
+
+def test_has_title(quote: Page):
+    
+    expect(quote).to_have_title(re.compile("Quotes of the times"))
+
+def test_background_appears(quote):
+    background = quote.locator(".background-image")
+    expect(background).to_have_css(
+        "background-image", 
+        'url("https://www.quoteofthetimes.com/wild-nature-7680x4320.jpg")'
+    )
+
+def test_has_text(quote):
+    expect(quote.get_by_text("Daily Inspiration")).to_be_visible()
+
+    expect(quote.get_by_text("Discover thousands of motivational, philosophical and famous quotes. Please use the view that is most comfortable for you 🙂")).to_be_visible()
+
+def test_quote_show(quote):
+    expect(quote.locator("#quote")).to_be_visible()
+
+def test_time_show(quote):
+    expect(quote.locator("#time")).to_be_visible()
+
+def test_background_click(quote):
+    quote.get_by_role("button", name="* Click for Alternate View *").click()
+    time.sleep(2)
+    background_2 = quote.locator(".background-image2")
+    expect(background_2).to_have_css(
+        "background-image", 'url("https://www.quoteofthetimes.com/Nature-image.jpg")'
+    )
+    expect(background_2).to_be_visible()
+time.sleep(5)
+
+def test_copy(quote):
+    copy = quote.get_by_role("button", name="📋 Copy")
+
+    copy.click()
+
+    text = quote.evaluate(
+        "navigator.clipboard.readText()"
+    )
+    print(text)
+
+def test_like_button(quote):
+    like = quote.get_by_role("button", name ="❤️ Like" )
+
+    like.click()
+    time.sleep(2)
+
+    like_box = quote.locator("#like-text").text_content()
+
+    assert like_box.strip() !=""
+
+def test_socials(quote):
+
+    expect(quote.locator(".fa-linkedin")).to_be_visible()
+
+    expect(quote.locator(".fa-instagram")).to_be_visible()
+
+    expect(quote.locator(".fa-github")).to_be_visible()
+
+    
+
+
+
+
+
+
