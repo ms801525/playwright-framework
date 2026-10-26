@@ -3,7 +3,7 @@ from playwright.sync_api import Page, expect, Browser
 
 @pytest.fixture (scope="module")
 def quote(browser: Browser):
-    context = browser.new_context()
+    context = browser.new_context(permissions=["clipboard-read", "clipboard-write"])
     page = context.new_page()
     page.goto("https://www.quoteofthetimes.com/")
 
@@ -41,17 +41,14 @@ def test_background_click(quote):
         "background-image", 'url("https://www.quoteofthetimes.com/Nature-image.jpg")'
     )
     expect(background_2).to_be_visible()
-time.sleep(5)
 
 def test_copy(quote):
-    copy = quote.get_by_role("button", name="📋 Copy")
+    shown = quote.locator("#quote").inner_text()
+    quote.get_by_role("button", name="📋 Copy").click()
 
-    copy.click()
+    copied = quote.evaluate("navigator.clipboard.readText()")
 
-    text = quote.evaluate(
-        "navigator.clipboard.readText()"
-    )
-    print(text)
+    assert copied.strip() == shown.strip()
 
 def test_like_button(quote):
     like = quote.get_by_role("button", name ="❤️ Like" )
