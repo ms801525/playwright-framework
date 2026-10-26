@@ -5,6 +5,7 @@ from playwright.sync_api import Page, expect, Browser
 def quote(browser: Browser):
     context = browser.new_context(permissions=["clipboard-read", "clipboard-write"])
     page = context.new_page()
+    expect(page.locator("#quote")).not_to_be_empty(timeout=10000)
     page.goto("https://www.quoteofthetimes.com/")
 
     yield page 
@@ -44,6 +45,7 @@ def test_background_click(quote):
 
 def test_copy(quote):
     shown = quote.locator("#quote").inner_text()
+    assert shown.strip() != ""
     quote.get_by_role("button", name="📋 Copy").click()
 
     copied = quote.evaluate("navigator.clipboard.readText()")
