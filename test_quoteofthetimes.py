@@ -5,8 +5,8 @@ from playwright.sync_api import Page, expect, Browser
 def quote(browser: Browser):
     context = browser.new_context(permissions=["clipboard-read", "clipboard-write"])
     page = context.new_page()
-    expect(page.locator("#quote")).not_to_be_empty(timeout=10000)
     page.goto("https://www.quoteofthetimes.com/")
+    expect(page.locator("#quote")).not_to_be_empty(timeout=10000)
 
     yield page 
     
