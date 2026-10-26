@@ -253,7 +253,7 @@ def test_char_count_analyze(toolkit):
     toolkit.locator("#text-analyzer-input").fill("Hello, My name is John. I live in New York.")
     toolkit.get_by_role("button", name = "Analyze").click()
 
-    expect(toolkit.get_by_text("Result: 43"))
+    expect(toolkit.get_by_text("Result: 43")).to_be_visible()
     time.sleep(2)
 
 def test_word_count_analyze(toolkit):
@@ -262,7 +262,7 @@ def test_word_count_analyze(toolkit):
     toolkit.locator("#text-analyzer-input").fill("Hello, My name is John. I live in New York.")
     toolkit.get_by_role("button", name = "Analyze").click()
 
-    expect(toolkit.get_by_text("Result: 10"))
+    expect(toolkit.get_by_text("Result: 10")).to_be_visible()
     time.sleep(2)
 
 def test_sen_count_analyze(toolkit):
@@ -271,7 +271,7 @@ def test_sen_count_analyze(toolkit):
     toolkit.locator("#text-analyzer-input").fill("Hello, My name is John. I live in New York.")
     toolkit.get_by_role("button", name = "Analyze").click()
 
-    expect(toolkit.get_by_text("Result: 2"))
+    expect(toolkit.get_by_text("Result: 2")).to_be_visible()
     time.sleep(2)
 
 def test_common_word_analyze(toolkit):
@@ -280,7 +280,7 @@ def test_common_word_analyze(toolkit):
     toolkit.locator("#text-analyzer-input").fill("Hello I am john. Hello I am Jason. Hello I am Jack. Hey I am Kat. Hey you are Kurt. Hello you are Sam. Hello this is Kurtis")
     toolkit.get_by_role("button", name = "Analyze").click()
 
-    expect(toolkit.get_by_text("Result: hello"))
+    expect(toolkit.get_by_text("Result: hello")).to_be_visible()
     time.sleep(2)
     
     
@@ -291,7 +291,7 @@ def test_first_key_pair(toolkit):
     toolkit.get_by_role("textbox", name="(REQUIRED) Enter title (e.g").fill("Make")
     toolkit.get_by_role("button", name="Format").click()
 
-    expect(toolkit.get_by_text("Invalid, first JSON key:value"))
+    expect(toolkit.get_by_text("Invalid, first JSON key:value")).to_be_visible()
     time.sleep(2)
 
 def test_first_value(toolkit):
@@ -300,7 +300,7 @@ def test_first_value(toolkit):
     toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
     toolkit.get_by_role("button", name="Format").click()
 
-    expect(toolkit.get_by_text("Invalid, first JSON key:value"))
+    expect(toolkit.get_by_text("Invalid, first JSON key:value")).to_be_visible()
     time.sleep(2)
 
 def test_first_key_value_pair(toolkit):
@@ -310,7 +310,7 @@ def test_first_key_value_pair(toolkit):
     toolkit.get_by_role("textbox", name="(REQUIRED) Enter text for to").fill("Honda")
     toolkit.get_by_role("button", name="Format").click()
 
-    expect(toolkit.get_by_text("{ \"Make\": \"Honda\" }"))
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\" }")).to_be_visible()
     time.sleep(2)
     
 def test_2_key_value_pair(toolkit):
@@ -327,7 +327,7 @@ def test_2_key_value_pair(toolkit):
 
     toolkit.get_by_role("button", name="Format").click()
 
-    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \""))
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \"")).to_be_visible()
     time.sleep(2)
 
 def test_3_key_value_pair(toolkit):
@@ -349,7 +349,7 @@ def test_3_key_value_pair(toolkit):
 
     toolkit.get_by_role("button", name="Format").click()
 
-    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \""))
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \"")).to_be_visible()
     time.sleep(2)
 
 def test_key_value_copy(toolkit):
@@ -374,7 +374,7 @@ def test_key_value_copy(toolkit):
 
     toolkit.locator("#text-analyzer-input").fill("{\n  \"Make\": \"Honda\",\n  \"Model\": \"Civic\",\n  \"Year\": \"2016\"\n}")
 
-    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \""))
+    expect(toolkit.get_by_text("{ \"Make\": \"Honda\", \"Model\": \"")).to_be_visible()
     time.sleep(2)
 
 
