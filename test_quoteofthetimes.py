@@ -1,4 +1,4 @@
-import re, pytest, time
+import re, pytest
 from playwright.sync_api import Page, expect, Browser
 
 @pytest.fixture (scope="module")
@@ -36,7 +36,6 @@ def test_time_show(quote):
 
 def test_background_click(quote):
     quote.get_by_role("button", name="* Click for Alternate View *").click()
-    time.sleep(2)
     background_2 = quote.locator(".background-image2")
     expect(background_2).to_have_css(
         "background-image", 'url("https://www.quoteofthetimes.com/Nature-image.jpg")'
@@ -56,11 +55,8 @@ def test_like_button(quote):
     like = quote.get_by_role("button", name ="❤️ Like" )
 
     like.click()
-    time.sleep(2)
 
-    like_box = quote.locator("#like-text").text_content()
-
-    assert like_box.strip() !=""
+    expect(quote.locator("#like-text")).not_to_have_text(re.compile(r"^\s*$"))
 
 def test_socials(quote):
 
